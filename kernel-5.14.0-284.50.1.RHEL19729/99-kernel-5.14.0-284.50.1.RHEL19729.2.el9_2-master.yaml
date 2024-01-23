@@ -1,0 +1,8 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master 
+  name: kernel-5.14.0-284.50.1
+spec:
+  osImageURL: quay.io/jclaret/kernel-5.14.0-284.50.1.rhel19729.2.el9_2.x86_64:4.14.5
