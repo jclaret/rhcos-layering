@@ -4,16 +4,8 @@
 ARG rhel_coreos_release
 FROM ${rhel_coreos_release}
 RUN rpm-ostree cliwrap install-to-root /
-# Env
-ENV KERNEL_RPM="http://10.19.4.80:8080/03688824/kernel-5.14.0-402.el9.x86_64.rpm \
-                http://10.19.4.80:8080/03688824/kernel-core-5.14.0-402.el9.x86_64.rpm \
-                http://10.19.4.80:8080/03688824/kernel-headers-5.14.0-402.el9.x86_64.rpm \
-                http://10.19.4.80:8080/03688824/kernel-devel-5.14.0-402.el9.x86_64.rpm \
-                http://10.19.4.80:8080/03688824/kernel-modules-core-5.14.0-402.el9.x86_64.rpm \
-                http://10.19.4.80:8080/03688824/kernel-modules-5.14.0-402.el9.x86_64.rpm \
-                http://10.19.4.80:8080/03688824/kernel-modules-extra-5.14.0-402.el9.x86_64.rpm"
 
 # Install hotfix rpm
-RUN rpm-ostree override replace ${KERNEL_RPM} && \
+RUN rpm-ostree override replace http://10.19.4.80:8080/03688824/kernel-{,core-,modules-,headers-,devel-,modules-core-,modules-extra-}5.14.0-402.el9.x86_64.rpm &&\
     rpm-ostree cleanup -m && \
     ostree container commit
